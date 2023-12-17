@@ -58,6 +58,7 @@ class install extends Command
         
             $this->info('Hemos instalado MarkertShopping con exito');
             $this->info('Gracias por Instalar MarkertShopping');
+            $this->call('serve');
         }else{
             $this->error('Detectamos una instalacion previa de MarkertShopping');
         }
