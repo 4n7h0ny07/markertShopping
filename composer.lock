@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2cb2d7337e3381b331b8dc473b4b57b2",
+    "content-hash": "3fa18ef03fcaae8d8f27c3e01387dfb8",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -6188,6 +6188,59 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.6"
             },
             "time": "2023-01-03T09:29:04+00:00"
+        },
+        {
+            "name": "vilbur/voyager-seeder",
+            "version": "v0.91",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vilbur/laravel-package-voyager-seeder.git",
+                "reference": "eb8f7fb6617c2eec9575f983975c1ab0f424a71d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vilbur/laravel-package-voyager-seeder/zipball/eb8f7fb6617c2eec9575f983975c1ab0f424a71d",
+                "reference": "eb8f7fb6617c2eec9575f983975c1ab0f424a71d",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Vilbur\\VoyagerSeeder\\Providers\\VoyagerSeederServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Vilbur\\VoyagerSeeder\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": ":vilbur",
+                    "email": "cerny.vil@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Seed tables of Laravel Voyager for models.",
+            "homepage": "https://github.com/Vilbur/laravel-package-voyager-seeder",
+            "keywords": [
+                "VoyagerSeeder",
+                "vilbur"
+            ],
+            "support": {
+                "issues": "https://github.com/vilbur/laravel-package-voyager-seeder/issues",
+                "source": "https://github.com/vilbur/laravel-package-voyager-seeder/tree/master"
+            },
+            "time": "2018-02-13T13:06:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
