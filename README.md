@@ -35,6 +35,6 @@ este sistema esta pesado a mejoras futuras con temas de impuestos Nacionales.
 ```
 composer install
 cp .env.example .env
-php artisan prestamos:install
+php artisan markertshopping:install
 chmod -R 777 storage bootstrap/cache
 ```
