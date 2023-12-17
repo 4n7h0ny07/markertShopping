@@ -16,9 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin/login', function () {
-    return view('index');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('login', function () {
+    return redirect('admin/login');
+})->name('login');
+
+Route::get('/', function () {
+    return redirect('admin');
+    // $template = '.default';
+    // return view("shop$template.index", compact('template'));
 });
+
 
 
 Route::group(['prefix' => 'admin'], function () {
