@@ -11,7 +11,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "tcg/voyager": "^1.7"
+        "orangehill/iseed": "^3.0",
+        "tcg/voyager": "^1.7",
+        "vilbur/voyager-seeder": "^0.91.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
