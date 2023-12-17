@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p> align="center" Fassid Soluciones y Servicios</p>
+<p align="center" font-size=""> Fassid Soluciones y Servicios</p>
 
 ## About MarkertShopping
 
@@ -16,18 +16,13 @@ sistema en desarrollo, pensado para gestionar empresas medianas o pequeñas, el 
 
 este sistema esta pesado a mejoras futuras con temas de impuestos Nacionales.
 
-## Proximamente en MarkertShopping
+# Proximamente en MarkertShopping
 
 - agreagadremos facturacion computarizada en linea
 - Agreagareamos Facturacion electronica en linea 
 - cobros mediante codigos Qr
 
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-#### Contribuyendo
+# Contribuyendo
 
 - estamos para contribuir con la sociedad.
 
