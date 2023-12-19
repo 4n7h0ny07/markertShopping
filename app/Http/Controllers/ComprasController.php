@@ -23,17 +23,17 @@ class ComprasController extends Controller
     public function list($search = null){
         $paginate = request('paginate') ?? 10;
 
-        // $data = Requerimiento::where(function($q) use ($search){
-        //     if ($search) {
-        //         $q->OrWhereRaw("id = '$search'")
-        //         ->OrWhereRaw("number like '%$search%'")
-        //         ->OrWhereRaw("documento like '%$search%'")
-        //         ->OrWhereRaw("tipo_requerimiento like '%$search%'");
-        //     }
-        // })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
-        //     return view('requerimientos.compras.list', compact('data'));
+        $data = Requerimiento::with(['persona', 'empleado'])->where(function($q) use ($search){
+            if ($search) {
+                $q->OrWhereRaw("id = '$search'")
+                ->OrWhereRaw("number like '%$search%'")
+                ->OrWhereRaw("documento like '%$search%'")
+                ->OrWhereRaw("tipo_requerimiento like '%$search%'");
+            }
+        })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+            return view('requerimientos.compras.list', compact('data'));
 
-        $data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        //$data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
         dd($data);
             return view('requerimientos.compras.list', compact('data'));
     }
@@ -106,7 +106,11 @@ class ComprasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //        $reg = Compra::with(['producto.tipo.marca', 'proveedor', 'empleado'])->where('id', $id)->where('deleted_at', NULL)->first();
+        //return view('compras.read', compact('reg'));
+
+        $reg = Requerimiento::where('id', $id)->where('deleted_at', null)->first();
+        return view('requerimientos.compras.read', compact('reg'));
     }
 
     /**

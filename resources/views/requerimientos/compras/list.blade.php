@@ -1,14 +1,14 @@
 <div class="col-md-12">
     <div class="table-responsive">
-        <table id="dataTable" class="table table-bordered table-hover">
+        <table id="dataTable" class="table table-hover dataTable no-footer">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
+                    <th>Numero</th>
                     <th>Proveedor</th>
-                    <th>Monto</th>
-                    <th>Detalles</th>
-                    <th>Total Bs.</th>
+                    <th>Detalles Costo</th>
+                    <th>Descripcion</th>
+                    <th>Solicitado por</th>
+                    <th>Registro.</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -16,23 +16,47 @@
                 @forelse($data as $item)
                     <tr>
                         <td>{{ $item->number }}</td>
-                        <td>{{ $item->persona_id }}</td>
+                        <td>{{ $item->names }}</td>
                         <td>
-                    <tr>
-                        <td>
-                        <td>{{ $item->adelanto }}</td>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Adelanto</th>
+                                        <th>T/Pagar</th>
+                                        <th>Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>{{ $item->adelanto }}</td>
+                                    <td>{{ $item->monto }}</td>
+                                    <td>{{ $item->saldo }}</td>        
+                                </tr>
+                                </tbody>
+                                
+                            </table>                            
                         </td>
-                        <td>
-                        <td>{{ $item->monto }}</td>
-                        </td>
-                        <td>
-                        <td>{{ $item->saldo }}</td>
+                     
+
+                    <td>{{ $item->descriptions }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>  {{ date('d/m/Y H:i', strtotime($item->created_at)) }} <br>
+                        <small>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small></td>
+                        <td class="no-sort no-click bread-actions text-right">
+                            <a href="{{ route('voyager.requerimientos.compras', $item->id) }}" title="Ver" class="btn btn-sm btn-warning view">
+                                <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
+                            </a>
+                            {{-- <a href="{{ route('voyager.requerimientos.compras.edit', $item->id) }}" title="Editar" class="btn btn-sm btn-primary edit">
+                                <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
+                            </a> --}}
+                            {{-- <button title="Borrar" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#delete_modal" onclick="deleteItem('{{ url('admin/personas/'.$item->id) }}')">
+                                <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
+                            </button>                        --}}
                         </td>
                     </tr>
-                    </td>
-                    <td>{{ $item->descriptions }}</td>
-                    <td>{{ $item->saldo }}</td>
-                    <td>{{ $item->user_id }}</td>
+                    @empty
+                    <tr>
+                        <td class="text-center" colspan="6">No hay resultados</td>
                     </tr>
                 @endforelse
 
