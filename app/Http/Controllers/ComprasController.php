@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\persona;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\persona;
 use App\Models\Requerimiento;
+use App\Models\User;
 
 class ComprasController extends Controller
 {
@@ -22,14 +23,18 @@ class ComprasController extends Controller
     public function list($search = null){
         $paginate = request('paginate') ?? 10;
 
-        $data = Requerimiento::where(function($q) use ($search){
-            if ($search) {
-                $q->OrWhereRaw("id = '$search'")
-                ->OrWhereRaw("number like '%$search%'")
-                ->OrWhereRaw("documento like '%$search%'")
-                ->OrWhereRaw("tipo_requerimiento like '%$search%'");
-            }
-        })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        // $data = Requerimiento::where(function($q) use ($search){
+        //     if ($search) {
+        //         $q->OrWhereRaw("id = '$search'")
+        //         ->OrWhereRaw("number like '%$search%'")
+        //         ->OrWhereRaw("documento like '%$search%'")
+        //         ->OrWhereRaw("tipo_requerimiento like '%$search%'");
+        //     }
+        // })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        //     return view('requerimientos.compras.list', compact('data'));
+
+        $data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        dd($data);
             return view('requerimientos.compras.list', compact('data'));
     }
 
@@ -94,6 +99,7 @@ class ComprasController extends Controller
             return redirect()->route('compras.index')->with(['message' => 'Ocurrio un error al guardar el Requerimiento', 'alert-type' => 'error']);
         }
     }
+
 
     /**
      * Display the specified resource.

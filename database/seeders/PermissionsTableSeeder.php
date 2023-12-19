@@ -47,6 +47,19 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('cuentas');
         Permission::generateFor('tipocuentas');
 
+        $keys = [
+            'browse_personas',
+            'browse_requerimientos',
+            'browse_transaccions',
+        ];
+
+        foreach ($keys as $key) {
+            Permission::firstOrCreate([
+                'key'        => $key,
+                'table_name' => null,
+            ]);
+        }
+
         // \DB::table('permissions')->delete();
         
         // \DB::table('permissions')->insert(array (

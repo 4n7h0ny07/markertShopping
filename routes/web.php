@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('import', importController::class);
     route::resource('requerimientos/compras', ComprasController::class);
-    Route::get('requerimientos/compras/list/ajax/{search}',[ComprasController::class, 'list']);
+    Route::get('requerimientos/compras/list/ajax/{search?}',[ComprasController::class, 'list']);
    // Route::get('personas/list/ajax/{search?}', [PersonasController::class, 'list']);
 
     Route::get('transaccions', [transaccionsController::class, 'index'])->name('transaccions.index');
