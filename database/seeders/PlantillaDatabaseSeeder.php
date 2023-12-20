@@ -27,8 +27,6 @@ class PlantillaDatabaseSeeder extends Seeder
         $this->call(DataTypesTableSeeder::class);
         $this->call(DataRowsTableSeeder::class);
         $this->call(MenuItemsTableSeeder::class);
-        $this->call(ProveedoresTableSeeder::class);
-        $this->call(CategoriasTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
     }
 }
