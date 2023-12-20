@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\persona;
 use Illuminate\Support\Facades\DB;
+use DataTables;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
+use App\Models\persona;
 use App\Models\Requerimiento;
+use App\Models\User;
+
 
 class ComprasController extends Controller
 {
@@ -19,18 +24,23 @@ class ComprasController extends Controller
         return view('requerimientos.compras.browse');
     }
 
-    public function list($search = null){
+    public function list($search = null)
+    {
         $paginate = request('paginate') ?? 10;
 
-        $data = Requerimiento::where(function($q) use ($search){
+        $data = Requerimiento::with(['persona', 'empleado'])->where(function ($q) use ($search) {
             if ($search) {
                 $q->OrWhereRaw("id = '$search'")
-                ->OrWhereRaw("number like '%$search%'")
-                ->OrWhereRaw("documento like '%$search%'")
-                ->OrWhereRaw("tipo_requerimiento like '%$search%'");
+                    ->OrWhereRaw("number like '%$search%'")
+                    ->OrWhereRaw("documento like '%$search%'")
+                    ->OrWhereRaw("tipo_requerimiento like '%$search%'");
             }
         })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
-            return view('requerimientos.compras.list', compact('data'));
+        return view('requerimientos.compras.list', compact('data'));
+
+        //$data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        dd($data);
+        return view('requerimientos.compras.list', compact('data'));
     }
 
     /**
@@ -52,13 +62,13 @@ class ComprasController extends Controller
      */
     public function store(Request $request)
     {
-        //      
+        //
         DB::beginTransaction();
 
         try {
             // Obtener el último número de compra
             $ultimoNumeroCompra = Requerimiento::whereNull('deleted_at')->max('number');
-           
+
             // Incrementar el último número en uno
             $nuevoNumero = $ultimoNumeroCompra + 1;
 
@@ -95,17 +105,42 @@ class ComprasController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        //        $reg = Compra::with(['producto.tipo.marca', 'proveedor', 'empleado'])->where('id', $id)->where('deleted_at', NULL)->first();
+        //return view('compras.read', compact('reg'));
+
+        $reg = Requerimiento::where('id', $id)->where('deleted_at', null)->first();
+        return view('requerimientos.compras.read', compact('reg'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+
+    public function print($id)
+    {
+        // $venta = Venta::with(['detalles.producto.tipo.marca', 'cliente', 'empleado', 'garantes.persona', 'detalles.cuotas.pagos' => function($q){
+        //     $q->where('deleted_at', NULL);
+        // }])
+        // ->where('id', $id)->where('deleted_at', NULL)->first();
+
+
+        $printer = Requerimiento::with(['persona', 'empleado' => function($q){
+            $q->whereNull('deleted_at');
+        }])                    
+        ->where('id', $id)->whereNull('deleted_at')->first();
+
+        //return view('requerimientos.compras.read', compact('printer'));
+
+        return view("printer.requerimientos.compras", compact('printer'));
+        // $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
+        // return $pdf->setPaper('letter')->stream();
+    }
     public function edit(string $id)
     {
         //

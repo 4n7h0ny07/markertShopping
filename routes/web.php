@@ -37,9 +37,14 @@ Route::group(['prefix' => 'admin'], function () {
     //imports routes
 
     Route::resource('import', importController::class);
+
+
     route::resource('requerimientos/compras', ComprasController::class);
-    Route::get('requerimientos/compras/list/ajax/{search}',[ComprasController::class, 'list']);
-   // Route::get('personas/list/ajax/{search?}', [PersonasController::class, 'list']);
+    Route::get('requerimientos/compras/list/ajax/{search?}',[ComprasController::class, 'list']);
+    Route::get('requerimientos/compras/{id}',[ComprasController::class, 'show'])->name('voyager.requerimientos.compras');
+    Route::get('requerimientos/compras/{id}/print', [ComprasController::class, 'print'])->name('compras.print');
+    
+   
 
     Route::get('transaccions', [transaccionsController::class, 'index'])->name('transaccions.index');
     
