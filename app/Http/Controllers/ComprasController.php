@@ -137,9 +137,10 @@ class ComprasController extends Controller
 
         //return view('requerimientos.compras.read', compact('printer'));
 
-        return view("printer.requerimientos.compras", compact('printer'));
-        // $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
-        // return $pdf->setPaper('letter')->stream();
+        //return view("printer.requerimientos.compras", compact('printer'));
+        $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
+        return $pdf->setPaper('letter')->stream();
+        //return $pdf->download('requerimientos.pdf');
     }
     public function edit(string $id)
     {
