@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title }} | {{ setting('site.title') }}</title>
+    <title>{{ setting('site.title') }}</title>
 
     <?php $admin_favicon = Voyager::setting('admin.icon_image', ''); ?>
     @if ($admin_favicon == '')
@@ -76,7 +76,7 @@
                     </td>
                     <td align="right">
                         <div>
-                            <h3 style="margin: 0px; padding: 0px;">{{ strtoupper($title) }}</h3>
+                            {{-- <h3 style="margin: 0px; padding: 0px;">{{ strtoupper($title) }}</h3> --}}
                             <small>Generado por {{ Auth::user()->name }}</small> <br>
                             <small>{{ date('d/m/Y H:i') }}</small>
                         </div>

@@ -16,7 +16,7 @@
                 @forelse($data as $item)
                     <tr>
                         <td>{{ $item->number }}</td>
-                        <td>{{ $item->names }}</td>
+                        <td>{{ $item->persona->names }}</td>
                         <td>
                             <table class="table">
                                 <thead>
@@ -39,7 +39,7 @@
                      
 
                     <td>{{ $item->descriptions }}</td>
-                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->empleado->name }}</td>
                     <td>  {{ date('d/m/Y H:i', strtotime($item->created_at)) }} <br>
                         <small>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small></td>
                         <td class="no-sort no-click bread-actions text-right">
