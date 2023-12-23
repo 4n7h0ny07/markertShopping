@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="requerimiento" id="requerimiento" class="form-control" rows="6" cols="10" placeholder="Requerimiento......">{{ isset($reg) ? $reg->requerimiento : old('requerimiento') }}</textarea>
+                                        <textarea name="requerimiento" id="requerimiento" class="form-control richTextBox" rows="6" cols="10" placeholder="Requerimiento......">{{ isset($reg) ? $reg->requerimiento : old('requerimiento') }}</textarea>
                                     </div>
                                 </div>
 

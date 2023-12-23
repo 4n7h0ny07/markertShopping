@@ -43,11 +43,16 @@
                     <td>  {{ date('d/m/Y H:i', strtotime($item->created_at)) }} <br>
                         <small>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small></td>
                         <td class="no-sort no-click bread-actions text-right">
+                            <a href="{{ route('compras.print', ['id' => $item->id]) }}" class="btn btn-dark">
+                                <span class="glyphicon glyphicon-print"></span>&nbsp;
+                               Pdf
+                            </a>
                             <a href="{{ route('voyager.requerimientos.compras', $item->id) }}" title="Ver" class="btn btn-sm btn-warning view">
                                 <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                             </a>
-                            {{-- <a href="{{ route('voyager.requerimientos.compras.edit', $item->id) }}" title="Editar" class="btn btn-sm btn-primary edit">
+                            {{-- <a href="{{ route('voyager.requerimientos.compras.edit', $item->id) }}" title="Editar"   target="_blank" class="btn btn-sm btn-primary edit">
                                 <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
+                              
                             </a> --}}
                             {{-- <button title="Borrar" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#delete_modal" onclick="deleteItem('{{ url('admin/personas/'.$item->id) }}')">
                                 <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>

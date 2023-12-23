@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Str;
+//use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 use App\Models\persona;
 use App\Models\Requerimiento;
 use App\Models\User;
@@ -27,7 +28,7 @@ class ComprasController extends Controller
     public function list($search = null)
     {
         $paginate = request('paginate') ?? 10;
-
+        $users = Auth::user()->id;
         $data = Requerimiento::with(['persona', 'empleado'])->where(function ($q) use ($search) {
             if ($search) {
                 $q->OrWhereRaw("id = '$search'")
@@ -35,7 +36,7 @@ class ComprasController extends Controller
                     ->OrWhereRaw("documento like '%$search%'")
                     ->OrWhereRaw("tipo_requerimiento like '%$search%'");
             }
-        })->where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
+        })->where('deleted_at', NULL)->where('user_id', $users)->orderBy('id', 'DESC')->paginate($paginate);
         return view('requerimientos.compras.list', compact('data'));
 
         //$data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
@@ -97,6 +98,17 @@ class ComprasController extends Controller
             ]);
             // dd($compra);
             DB::commit();
+            // $printer = Requerimiento::with(['persona', 'empleado' => function($q){
+            //     $q->whereNull('deleted_at');
+            // }])                    
+            // ->where('id', $id)whereNull('deleted_at')->first();
+    
+            // //return view('requerimientos.compras.read', compact('printer'));
+    
+            // //return view("printer.requerimientos.compras", compact('printer'));
+            // $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
+            // //return $pdf->setPaper('letter')->stream();
+            // return $pdf->download('requerimientos.pdf');
             return redirect()->route('compras.index')->with(['message' => 'Requerimeinto guardado exitosamente', 'alert-type' => 'success']);
         } catch (\Throwable $th) {
             dd($th);
@@ -115,6 +127,7 @@ class ComprasController extends Controller
         //return view('compras.read', compact('reg'));
 
         $reg = Requerimiento::where('id', $id)->where('deleted_at', null)->first();
+
         return view('requerimientos.compras.read', compact('reg'));
     }
 
@@ -139,8 +152,9 @@ class ComprasController extends Controller
 
         //return view("printer.requerimientos.compras", compact('printer'));
         $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
-        return $pdf->setPaper('letter')->stream();
-        //return $pdf->download('requerimientos.pdf');
+        $pdf_name= 'Req_'.$printer->number.'_'.str::Slug($printer->persona->names).'.pdf';
+        //return $pdf->setPaper('letter')->stream();
+        return $pdf->download($pdf_name);
     }
     public function edit(string $id)
     {
