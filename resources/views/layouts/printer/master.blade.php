@@ -74,7 +74,7 @@
         <table width="100%">
             <tr>
                 <td width="35%">
-                    <img src="{{ asset('images/moxos.png') }}" alt="Moxos Import Export Image">
+                    <img src="{{ asset('images/moxos.png') }}" alt="Moxos Import Export Image" width="250px">
                 </td>
                 <td align="center" width="75%">
                     <div class="col-md-12 text-center">

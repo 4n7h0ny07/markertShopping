@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activos', function (Blueprint $table) {
+        Schema::create('empleados', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('persona_id')->unsigned();
-            $table->bigInteger('cuenta_id')->unsigned();
             $table->integer('number')->unique();
             $table->string('code_number')->unique()->nullable();
-            $table->string('name')->nullable();
-            $table->string('marca')->nullable();
-            $table->string('modelo')->nullable();;
-            $table->string('serialNumber')->nullable();
-            $table->text('descriptions')->nullable();
-            $table->decimal('costo',10,2)->nullable();
-            $table->decimal('vida_util',10,2)->nullable();
+            $table->string('area')->nullable();
+            $table->string('cargo')->nullable();
+            $table->string('sucursal')->nullable();;
+            $table->integer('win')->nullable();
+            $table->decimal('salario',10,2)->nullable();
+            $table->decimal('incremento',10,2)->nullable();
             $table->text('observaciones')->nullable();
             $table->foreign('persona_id')->references('id')->on('personas');
-            $table->foreign('cuenta_id')->references('id')->on('cuentas');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
@@ -39,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activos');
+        Schema::dropIfExists('empleados');
     }
 };

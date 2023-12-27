@@ -11,25 +11,25 @@ use Illuminate\Support\Str;
 //use Barryvdh\DomPDF\Facade\Pdf;
 use PDF;
 use App\Models\persona;
-use App\Models\Requerimiento;
+use App\Models\Activos;
+use App\Models\cuenta;
 use App\Models\User;
 
-
-class ComprasController extends Controller
+class ActivosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('requerimientos.compras.browse');
+        return view('requerimientos.activos.browse');
     }
 
     public function list($search = null)
     {
         $paginate = request('paginate') ?? 10;
         $users = Auth::user()->id;
-        $data = Requerimiento::with(['persona', 'empleado'])->where(function ($q) use ($search) {
+        $data = Activos::with(['persona', 'cuenta', 'empleado'])->where(function ($q) use ($search) {
             if ($search) {
                 $q->OrWhereRaw("id = '$search'")
                     ->OrWhereRaw("number like '%$search%'")
@@ -37,11 +37,11 @@ class ComprasController extends Controller
                     ->OrWhereRaw("tipo_requerimiento like '%$search%'");
             }
         })->where('deleted_at', NULL)->where('user_id', $users)->orderBy('id', 'DESC')->paginate($paginate);
-        return view('requerimientos.compras.list', compact('data'));
+        return view('requerimientos.activos.list', compact('data'));
 
         //$data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
-        dd($data);
-        return view('requerimientos.compras.list', compact('data'));
+        //dd($data);
+       // return view('requerimientos.activos.list', compact('data'));
     }
 
     /**
@@ -52,10 +52,14 @@ class ComprasController extends Controller
         $type = 'add';
         //$personas = Persona::where('deleted_at', NULL,);
         $personas = Persona::whereHas('grupos', function ($query) {
-            $query->where('names', 'proveedores');
+            $query->where('names', 'personal',);
         })->get();
 
-        return view('requerimientos.compras.add-edit', compact('type', 'personas'));
+        $cuenta = cuenta::whereHas('tipocuenta', function ($query) {
+            $query->where('nametype', 'activos',);
+        });
+
+        return view('requerimientos.activos.add-edit', compact('type', 'personas', 'cuenta'));
     }
 
     /**
@@ -68,37 +72,38 @@ class ComprasController extends Controller
 
         try {
             // Obtener el último número de compra
-            $ultimoNumeroCompra = Requerimiento::whereNull('deleted_at')->max('number');
+            $ultimoNumeroActivo = Activos::whereNull('deleted_at')->max('number');
 
             // Incrementar el último número en uno
-            $nuevoNumero = $ultimoNumeroCompra + 1;
-
+            $nuevoNumero = $ultimoNumeroActivo + 1;
             // Formatear con ceros a la izquierda para tener siempre 6 dígitos
             $numeroAscendente = str_pad($nuevoNumero, 6, '0', STR_PAD_LEFT);
-            $total = $request->input('tpagar');
-            $adelanto = $request->input('anticipo');
-            $saldo = null;
-            if (isset($adelanto)) {
-                $saldo = $total - $adelanto;
-            } else {
-                $adelanto = null;
-            }
+            //armar codigo de activo para insersion en la base de datos 
+            $id_cuenta = str_pad($request->input('cuentas'), 3, '0', STR_PAD_LEFT);
+            $cuenta = Cuenta::find($request->input('cuentas'));
+            $id_tipocuenta = str_pad($cuenta->tipocuenta_id, 2, '0', STR_PAD_LEFT);
+            $code_number = $id_cuenta.'-'.$id_tipocuenta;
+            
 
-            $compra = Requerimiento::create([
-                'persona_id' => $request->proveedor_id,
+            $compra = Activos::create([
+                'persona_id' => $request->personal,
+                'cuenta_id' => $request->cuentas,
                 'number' => $numeroAscendente,
-                'monto' => $request->tpagar,
-                'adelanto' => $request->anticipo,
-                'saldo' => $saldo,
-                'descriptions' => $request->requerimiento,
-                'tipo_requerimiento' => $request->tipo,
-                'documento' => $request->documento,
+                'code_number',
+                'name' => $request->name_activo,
+                'marca' => $request->marca,
+                'modelo' => $request->modelo,
+                'serialNumber' => $request->serialnumber,
+                'descriptions' => $request->descripcion,
+                'costo' => $request->proveedor_id,
+                'vida_util' => $request->proveedor_id,
                 'observaciones' => $request->observaciones,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id             
+
             ]);
             // dd($compra);
+
             $ultimaIdInsertada = DB::getPdo()->lastInsertId();
-            
             DB::commit();
 
             print($ultimaIdInsertada);
@@ -117,10 +122,9 @@ class ComprasController extends Controller
      */
     public function show(string $id)
     {
+        $reg = Activos::where('id', $id)->where('deleted_at', null)->first();
 
-        $reg = Requerimiento::where('id', $id)->where('deleted_at', null)->first();
-
-        return view('requerimientos.compras.read', compact('reg'));
+        return view('requerimientos.activos.read', compact('reg'));
     }
 
     /**
@@ -129,15 +133,16 @@ class ComprasController extends Controller
 
     public function print($id)
     {
-        $printer = Requerimiento::with(['persona', 'empleado' => function($q){
+        
+        $printer = Activos::with(['persona', 'empleado' => function($q){
             $q->whereNull('deleted_at');
         }])                    
         ->where('id', $id)->whereNull('deleted_at')->first();
 
         //return view('requerimientos.compras.read', compact('printer'));
         //return view("printer.requerimientos.compras", compact('printer'));
-        $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
-        $pdf_name= 'Req_'.$printer->number.'_'.str::Slug($printer->persona->names).'.pdf';
+        $pdf = PDF::loadView("printer.requerimientos.activos", compact('printer'));
+        $pdf_name= 'frm_4_'.$printer->number.'_'.str::Slug($printer->persona->names).'.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\importController;
 use App\Http\Controllers\transaccionsController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\ActivosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('requerimientos/compras/list/ajax/{search?}',[ComprasController::class, 'list']);
     Route::get('requerimientos/compras/{id}',[ComprasController::class, 'show'])->name('voyager.requerimientos.compras');
     Route::get('requerimientos/compras/{id}/print', [ComprasController::class, 'print'])->name('compras.print');
+
+    route::resource('requerimientos/activos', ActivosController::class);
+    Route::get('requerimientos/activos/list/ajax/{search?}',[ActivosController::class, 'list']);
+    Route::get('requerimientos/activos/{id}',[ActivosController::class, 'show'])->name('voyager.requerimientos.activos');
+    Route::get('requerimientos/activos/{id}/print', [ActivosController::class, 'print'])->name('activos.print');
     
    
 

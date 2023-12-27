@@ -14,8 +14,7 @@
         "laravel/tinker": "^2.8",
         "orangehill/iseed": "^3.0",
         "spipu/html2pdf": "^5.2",
-        "tcg/voyager": "^1.7",
-        "vilbur/voyager-seeder": "^0.91.0"
+        "tcg/voyager": "^1.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

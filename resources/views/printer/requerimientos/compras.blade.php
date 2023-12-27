@@ -172,7 +172,7 @@
                             <span><b> {{ $printer->persona->names }}</b></span><br><br><br>
                             <span style="color: rgba(10, 10, 105, 0.856); font-size:9pt; "><b class="text-right">Anticipo
                                     al Proveedor Monto $us/Bs.: </b></span>
-                            <span style="font-size:11pt; "><b class="text-left" style="text-align: right !important;">@php  echo number_format($printer->anticipo,2);@endphp</b></span><br>
+                            <span style="font-size:11pt; "><b class="text-left" style="text-align: right !important;">@php  echo number_format($printer->adelanto,2);@endphp</b></span><br>
                             <span style="color: rgba(10, 10, 105, 0.856); font-size:9pt; "><b class="text-right"
                                     style="text-align: left !important;">Total a Pagar $us/Bs.: </b></span>
                             <span style="font-size:11pt; text-align:right !important;"><b class="text-right">@php  echo number_format($printer->monto,2);@endphp</b></span>
