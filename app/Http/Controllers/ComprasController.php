@@ -17,6 +17,11 @@ use App\Models\User;
 
 class ComprasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +32,7 @@ class ComprasController extends Controller
 
     public function list($search = null)
     {
-        $paginate = request('paginate') ?? 10;
+        $paginate = request('paginate') ?? 25;       
         $users = Auth::user()->id;
         $data = Requerimiento::with(['persona', 'empleado'])->where(function ($q) use ($search) {
             if ($search) {
@@ -39,11 +44,7 @@ class ComprasController extends Controller
         })->where('deleted_at', NULL)->where('user_id', $users)->orderBy('id', 'DESC')->paginate($paginate);
         return view('requerimientos.compras.list', compact('data'));
 
-        //$data = Requerimiento::where('deleted_at', NULL)->orderBy('id', 'DESC')->paginate($paginate);
-        dd($data);
-        return view('requerimientos.compras.list', compact('data'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -57,7 +58,6 @@ class ComprasController extends Controller
 
         return view('requerimientos.compras.add-edit', compact('type', 'personas'));
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -97,15 +97,15 @@ class ComprasController extends Controller
                 'user_id' => Auth::user()->id
             ]);
             // dd($compra);
-            $ultimaIdInsertada = DB::getPdo()->lastInsertId();
-            
+           // $id = DB::getPdo()->lastInsertId();
+            //dd($id);
             DB::commit();
 
-            print($ultimaIdInsertada);
-
+          
             return redirect()->route('compras.index')->with(['message' => 'Requerimeinto guardado exitosamente', 'alert-type' => 'success']);
+            
         } catch (\Throwable $th) {
-            dd($th);
+            //dd($th);
             DB::rollback();
             return redirect()->route('compras.index')->with(['message' => 'Ocurrio un error al guardar el Requerimiento', 'alert-type' => 'error']);
         }
@@ -129,15 +129,15 @@ class ComprasController extends Controller
 
     public function print($id)
     {
-        $printer = Requerimiento::with(['persona', 'empleado' => function($q){
+        $printer = Requerimiento::with(['persona', 'empleado' => function ($q) {
             $q->whereNull('deleted_at');
-        }])                    
-        ->where('id', $id)->whereNull('deleted_at')->first();
+        }])
+            ->where('id', $id)->whereNull('deleted_at')->first();
 
         //return view('requerimientos.compras.read', compact('printer'));
         //return view("printer.requerimientos.compras", compact('printer'));
         $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
-        $pdf_name= 'Req_'.$printer->number.'_'.str::Slug($printer->persona->names).'.pdf';
+        $pdf_name = 'Req_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);
     }

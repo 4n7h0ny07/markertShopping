@@ -42,4 +42,9 @@ class User extends \TCG\Voyager\Models\User
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin()
+    {
+        return $this->hasAnyRole(['Admin', 'Gerente', 'Supervisor']);
+    }
 }

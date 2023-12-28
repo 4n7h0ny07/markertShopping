@@ -45,23 +45,23 @@
                                 @switch($reg->tipo_requerimiento)
                                     @case('Compra')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">COMPRA
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">PAGO
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">FONDO EN
                                                 AVANCE
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">CONSUMO
@@ -71,23 +71,23 @@
 
                                     @case('Pago')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">COMPRA
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">PAGO
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">FONDO EN
                                                 AVANCE
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">CONSUMO
@@ -97,23 +97,23 @@
 
                                     @case('Fondo en Avance')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">COMPRA
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">PAGO
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">FONDO EN
                                                 AVANCE
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">CONSUMO
@@ -123,23 +123,23 @@
 
                                     @case('Consumo')
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">COMPRA
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">PAGO
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch"
+                                            <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">FONDO EN
                                                 AVANCE
                                             </label>
-                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                            <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                                 id="flexSwitchCheckDefault">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"
                                                 style="color:rgba(10, 10, 105, 0.856); font-size:16pt; font-weight:bold">CONSUMO

@@ -67,21 +67,21 @@
                                                 <label>Cuentas:</label>
                                                 <select name="cuentas" id="cuentas" class="form-control select2">
                                                     <option disabled selected value="">Seleccionar Cuenta </option>
-                                                    @foreach ($cuenta as $items)
-                                                        <option value="{{ $items->id }}">{{ $items->name }} -
-                                                            {{ $items->code ?? 'NN' }}</option>
+                                                    @foreach ($cuentas as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }} -
+                                                            {{ $item->code ?? 'NN' }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Nombre del Activo</label>
                                                 <input type="text" name="name_activo" id="name_activo"
                                                     class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Marca</label>
                                                 <input type="text" name="marca" id="marca" class="form-control">

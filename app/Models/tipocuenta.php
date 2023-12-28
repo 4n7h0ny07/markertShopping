@@ -9,8 +9,10 @@ class tipocuenta extends Model
 {
     use HasFactory;
 
+    protected $table = 'tipocuentas';
+
     public function cuenta()
     {
-        return $this->hasMany(Cuenta::class);
+        return $this->hasMany(cuenta::class);
     }
 }

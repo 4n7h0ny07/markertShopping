@@ -61,7 +61,11 @@
                     </tr>
                     @empty
                     <tr>
-                        <td class="text-center" colspan="6">No hay resultados</td>
+                        <td class="text-center" colspan="7">
+                            <div class="alert alert-warning"  role="alert">
+                                <strong><h3><i class="voyager-info-circled"></i><br> No hay resultados </h3></strong>
+                            </div>
+                        </td>
                     </tr>
                 @endforelse
 

@@ -41,27 +41,27 @@
                             @switch($printer->documento)
                                 @case('Factura')
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Factura
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Proforma
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Nota de
                                             venta
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Otros
                                         </label>
@@ -70,27 +70,27 @@
 
                                 @case('Proforma')
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Factura
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Proforma
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Nota de
                                             venta
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Otros
                                         </label>
@@ -99,19 +99,19 @@
 
                                 @case('Nota de Venta')
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Factura
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly" id="flexSwitchCheckDefault"> 
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Proforma
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Nota
@@ -120,7 +120,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch"
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Otros
@@ -130,21 +130,21 @@
 
                                 @case('Otros')
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch"
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Factura
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch"
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Proforma
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch"
+                                        <input class="form-check-input" type="checkbox" role="switch" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Nota
@@ -153,7 +153,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked"
+                                        <input class="form-check-input" type="checkbox" role="switch" checked="checked" readonly="readonly"
                                             id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault"
                                             style="color:rgba(10, 10, 105, 0.856); font-size:10pt; font-weight:bold">Otros

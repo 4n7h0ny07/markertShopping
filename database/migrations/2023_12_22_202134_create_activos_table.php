@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('persona_id')->unsigned();
             $table->bigInteger('cuenta_id')->unsigned();
-            $table->integer('number')->unique();
+            $table->string('number')->unique();
             $table->string('code_number')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('marca')->nullable();

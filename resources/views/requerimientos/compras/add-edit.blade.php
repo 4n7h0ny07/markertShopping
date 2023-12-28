@@ -7,10 +7,24 @@
 @section('page_title', ($type == 'edit' ? 'Editar' : 'Agregar') . ' Compras')
 
 @section('page_header')
-    <h1 class="page-title">
+    <div class="row">
+        <div class="col-md-4">
+            <h1 class="page-title">
+                <i class="voyager-bag"></i>
+                {{ ($type == 'edit' ? 'Editar' : 'Agregar') . ' Compras' }}
+            </h1>
+        </div>
+        <div class="col-md-8 text-right" style="margin-top: 30px">
+            <a href="{{ route('activos.index') }}" class="btn btn-warning">
+                <span class="glyphicon glyphicon-list"></span>&nbsp;
+                Volver a la lista
+            </a>
+        </div>
+    </div>
+    {{-- <h1 class="page-title">
         <i class="voyager-receipt"></i>
         {{ ($type == 'edit' ? 'Editar' : 'Agregar') . ' Compras' }}
-    </h1>
+    </h1> --}}
 @stop
 
 @section('content')
@@ -49,7 +63,7 @@
                             @endif
 
                             <div class="row">
-                                <div class="col-md-9" >
+                                <div class="col-md-9">
                                     <div class="form-group">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -91,7 +105,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="requerimiento" id="requerimiento" class="form-control richTextBox" rows="6" cols="10" placeholder="Requerimiento......">{{ isset($reg) ? $reg->requerimiento : old('requerimiento') }}</textarea>
+                                        <textarea name="requerimiento" id="requerimiento" class="form-control richTextBox" rows="6" cols="10"
+                                            placeholder="Requerimiento......">{{ isset($reg) ? $reg->requerimiento : old('requerimiento') }}</textarea>
                                     </div>
                                 </div>
 

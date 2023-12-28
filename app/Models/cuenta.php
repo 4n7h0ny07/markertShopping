@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class cuenta extends Model
 {
     use HasFactory;
+    protected $table = 'cuentas';
 
     public function tipoCuenta()
     {
-        return $this->belongsTo(TipoCuenta::class, 'tipocuenta_id');
+        return $this->belongsTo(tipocuenta::class);
     }
 
     public function activos()

@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('cuentas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tipocuenta_id')->unsigned();
+            $table->bigInteger('tipo_cuenta_id')->unsigned();
             $table->string('code')->unique();
             $table->string('name');
             $table->decimal('saldo',10,2)->default(0);
             $table->string('descriptions')->nullable();
-            $table->foreign('tipocuenta_id')->references('id')->on('tipocuentas');
+            $table->foreign('tipo_cuenta_id')->references('id')->on('tipocuentas');
             $table->timestamps();
             $table->softDeletes();
         });
