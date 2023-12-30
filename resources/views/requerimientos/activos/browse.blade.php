@@ -57,7 +57,7 @@
         </div>
     </div>
 
-
+    @include('partials.modal-delete')
 @stop
 @section('css')
 
@@ -80,7 +80,7 @@
         });
         function list(page = 1){
              //$('#div-results').loading({message: 'Cargando...'});
-            let url = '{{ url("admin/requerimientos/compras/list/ajax") }}';
+            let url = '{{ url("admin/requerimientos/activos/list/ajax") }}';
             let search = $('#input-search').val() ? $('#input-search').val() : '';
             $.ajax({
                 url: `${url}/${search}?paginate=${countPage}&page=${page}`,

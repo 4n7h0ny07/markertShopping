@@ -129,6 +129,8 @@ class ComprasController extends Controller
 
     public function print($id)
     {
+        $title_printer = "FORMULARIO DE REQUERIMIENTO INTERNO";
+        $subTitle_printer = "MATERIALES, SUMINISTROS Y OTROS";
         $printer = Requerimiento::with(['persona', 'empleado' => function ($q) {
             $q->whereNull('deleted_at');
         }])
@@ -136,7 +138,7 @@ class ComprasController extends Controller
 
         //return view('requerimientos.compras.read', compact('printer'));
         //return view("printer.requerimientos.compras", compact('printer'));
-        $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer'));
+        $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer', 'title_printer', 'subTitle_printer'));
         $pdf_name = 'Req_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);

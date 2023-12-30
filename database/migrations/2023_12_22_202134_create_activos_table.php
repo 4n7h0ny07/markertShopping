@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('serialNumber')->nullable();
             $table->text('descriptions')->nullable();
             $table->decimal('costo',10,2)->nullable();
+            $table->decimal('valor_residual', 10,2)->nullable();
             $table->decimal('vida_util',10,2)->nullable();
+            $table->boolean('status_at')->default(true)->nullable();
             $table->text('observaciones')->nullable();
             $table->foreign('persona_id')->references('id')->on('personas');
             $table->foreign('cuenta_id')->references('id')->on('cuentas');

@@ -87,13 +87,13 @@
                                                 <input type="text" name="marca" id="marca" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>modelo</label>
                                                 <input type="text" name="modelo" id="modelo" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Numero de Serie/Imei</label>
                                                 <input type="text" name="serialnumber" id="serialnumber"
@@ -104,6 +104,12 @@
                                             <div class="form-group">
                                                 <label>Costo</label>
                                                 <input type="text" name="costo" id="costo" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Valor Residual</label>
+                                                <input type="text" name="vresidual" id="vresidual" class="form-control"  value="1" readonly="readonly" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -150,7 +156,7 @@
                                     </div> --}}
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block btn-submit"><i
-                                                class="voyager-check"></i> Guardar compra</i></button>
+                                                class="voyager-check"></i> Guardar</i></button>
                                     </div>
                                 </div>
                             </div>

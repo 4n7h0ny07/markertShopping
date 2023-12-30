@@ -18,5 +18,10 @@ class persona extends Model
         return $this->belongsTo(Grupo::class, 'group_id');
     }
 
+    public function activos()
+    {
+        return $this->hasMany(activos::class);
+    }
+
    
 }

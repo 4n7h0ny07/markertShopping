@@ -79,9 +79,10 @@
                 <td align="center" width="75%">
                     <div class="col-md-12 text-center">
                         <h3 style="color: rgba(10, 10, 105, 0.856)">
-                            FORMULARIO DE REQUERIMIENTO INTERNO <br> <small
-                                style="color: rgba(10, 10, 105, 0.856)">MATERIALES, SUMINISTROS Y OTROS</small>
+                            {{$title_printer}} <br> <small
+                                style="color: rgba(10, 10, 105, 0.856)">{{$subTitle_printer}}</small>
                         </h3>
+                        
 
                         @switch($printer->tipo_requerimiento)
                             @case('Compra')

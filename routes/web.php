@@ -30,7 +30,7 @@ Route::get('/', function () {
     // return view("shop$template.index", compact('template'));
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'loghttp'], function () {
     Voyager::routes();
 
     //imports routes
@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('requerimientos/activos/list/ajax/{search?}',[ActivosController::class, 'list']);
     Route::get('requerimientos/activos/{id}',[ActivosController::class, 'show'])->name('voyager.requerimientos.activos');
     Route::get('requerimientos/activos/{id}/print', [ActivosController::class, 'print'])->name('activos.print');
+    Route::put('requerimientos/activos/{id}/death',[ActivosController::class, 'death'])->name('requerimientos.death');
     
    
 

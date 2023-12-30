@@ -40,15 +40,21 @@ class ActivosController extends Controller
             $paginate = request('paginate') ?? 25;
             $user = Auth::user()->id;
 
-            $activos = Activos::with([])->where(function($q) use ($search) {
+            $activos = Activos::with(['persona', 'cuenta', 'empleado'])->where(function($q) use ($search) {
                 if ($search){
                     $q->OrWhereRaw("id = '$search'")
-                      ->OrWhereRaw("Number like '%$search%'")
-                      ->OrWhereRaw("serialNumber like '%$search%'")
-                      ->OrWhereRaw("marca like '%$search%'");
+                        ->OrWhereRaw("Number like '%$search%'")
+                        ->OrWhereRaw("serialNumber like '%$search%'")
+                        ->OrWhereRaw("marca like '%$search%'");
                 }
             })->where('deleted_at', NULL)->where('user_id', $user)->orderBy('id', 'DESC')->paginate($paginate);
-            return view('requerimientos.activos.list', compact('activos'));
+           
+            //dd($activos);
+            
+           
+           return view('requerimientos.activos.list', compact('activos'));
+
+            
     }
 
 
@@ -81,7 +87,7 @@ class ActivosController extends Controller
 
         $formNumber = Activos::whereNull('deleted_at')->max('number');
         $newFormNumber = $formNumber + 1;
-        $maxFormNumber = str_pad($formNumber, 6, '0', STR_PAD_LEFT);
+        $maxFormNumber = str_pad($newFormNumber, 6, '0', STR_PAD_LEFT);
 
         $numberCuentas = str_pad($request->input('cuentas'), 3, '0', STR_PAD_LEFT);
 
@@ -89,19 +95,22 @@ class ActivosController extends Controller
             'persona_id' => $request->personal,
             'cuenta_id' => $request->cuentas,
             'number' => $maxFormNumber,
-            'code_number',
+            //'code_number',
             'name' => $request->name_activo,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
             'serialNumber' => $request->serialnumber,
             'descriptions' => $request->descripcion,
             'costo' => $request->costo,
+            'valor_residual' => $request->vresidual,
             'vida_util' => $request->vutil,
+            'status_at' => true,
             'observaciones' => $request->observaciones,
             'user_id' => Auth::user()->id 
         ]);
-
+        //dd($activar);
         DB::commit(); 
+        
         $id = DB::getPdo()->lastInsertId();
 
         print($id);
@@ -124,9 +133,42 @@ class ActivosController extends Controller
     {
         //para visualizar los activos en la vista show 
 
-        $activ = Activos::where('id', $id)->WhereNull('deleted_at')->first();
+        $act = Activos::with(['persona', 'cuenta', 'empleado'])->where('id', $id)->WhereNull('deleted_at')->first();
 
-        return view('requerimientos.activos.read', compact('activ'));
+        return view('requerimientos.activos.read', compact('act'));
+    }
+
+    public function print($id){
+        $title_printer = "FORMULARIO DE SOLICITUD DE ALTA";
+        $subTitle_printer = "DE ACTIVO FIJO";
+        $printer =  Activos::with(['persona', 'cuenta', 'empleado' =>function ($q){
+            $q->whereNull('deleted_at');
+        }])->where('id', $id)->whereNull('deleted_at')->first();
+
+        $pdf = PDF::loadView("printer.requerimientos.activos", compact('printer', 'title_printer', 'subTitle_printer'));
+        $pdf_name = 'frm_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
+        //return $pdf->setPaper('letter')->stream();
+        return $pdf->download($pdf_name);
+    }
+
+    public function death(Request $request, $id){
+       
+        $baja= Activos::fileinode($id);
+        $baja->status_at  = false;
+        //$baja->baja_text  = $request->detalleBaja;
+        $baja->save();
+
+        $title_printer = "FORMULARIO DE SOLICITUD DE BAJA";
+        $subTitle_printer = "DE ACTIVO FIJO";
+
+        $printer =  Activos::with(['persona', 'cuenta', 'empleado' =>function ($q){
+            $q->whereNull('deleted_at');
+        }])->where('id', $id)->whereNull('deleted_at')->first();
+
+        $pdf = PDF::loadView("printer.requerimientos.baja", compact('printer', 'title_printer', 'subTitle_printer'));
+        $pdf_name = 'frm_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
+        //return $pdf->setPaper('letter')->stream();
+        return $pdf->download($pdf_name);
     }
 
     /**
@@ -151,5 +193,17 @@ class ActivosController extends Controller
     public function destroy(string $id)
     {
         //
+        DB::beginTransaction();
+        try {
+            Activos::where('id', $id)->update([
+                'estado' => 'eliminado',
+                'deleted_at' => Carbon::now()
+            ]);
+            DB::commit();
+            return redirect()->route('activos.index')->with(['message' => 'El Activo fue eliminado exitosamente', 'alert-type' => 'success']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->route('activos.index')->with(['message' => 'Ocurrio un error al eliminar el producto', 'alert-type' => 'error']);
+        }
     }
 }
