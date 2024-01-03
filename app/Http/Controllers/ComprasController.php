@@ -74,7 +74,7 @@ class ComprasController extends Controller
             $nuevoNumero = $ultimoNumeroCompra + 1;
 
             // Formatear con ceros a la izquierda para tener siempre 6 dígitos
-            $numeroAscendente = str_pad($nuevoNumero, 6, '0', STR_PAD_LEFT);
+            $numeroAscendente = str_pad($nuevoNumero, 6, '0', STR_PAD_LEFT)."/".date('Y');
             $total = $request->input('tpagar');
             $adelanto = $request->input('anticipo');
             $saldo = null;
@@ -138,7 +138,7 @@ class ComprasController extends Controller
 
         //return view('requerimientos.compras.read', compact('printer'));
         //return view("printer.requerimientos.compras", compact('printer'));
-        $pdf = PDF::loadView("printer.requerimientos.compras", compact('printer', 'title_printer', 'subTitle_printer'));
+        $pdf = PDF::setpaper('letter')->loadView("printer.requerimientos.compras", compact('printer', 'title_printer', 'subTitle_printer'));
         $pdf_name = 'Req_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);

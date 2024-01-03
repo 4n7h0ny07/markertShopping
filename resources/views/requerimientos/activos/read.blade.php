@@ -46,7 +46,7 @@
             </h1>
         </div>
         <div class="col-md-8 text-right" style="margin-top: 30px">
-            <a href="{{ route('activos.print', ['id' => $act->id]) }}" target="_blank" class="btn btn-dark">
+            <a href="{{ route('activos.print', ['id' => $act->id]) }}" class="btn btn-dark">
                 <span class="glyphicon glyphicon-print"></span>&nbsp;
                 Imprimir PDF
             </a>

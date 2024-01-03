@@ -24,8 +24,8 @@
             </thead>
             <tbody class="tbody-pdf">
                 <tr>
-                    <td colspan="2" heigth="80mm">
-                        <div style="height: 80mm; font-size:11pt; text-align:justify;">
+                    <td colspan="2" heigth="74mm">
+                        <div style="height: 74mm; font-size:11pt; text-align:justify;">
                             {{ $printer->descriptions }}
                         </div>
 
@@ -181,7 +181,7 @@
                 </tr>
                 <tr style="border: ridge; border-radius:0.5em; border-color:rgba(10, 10, 105, 0.856);">
                     <td colspan="2" width="100%" >
-                        <div style="height: 20mm">
+                        <div style="height: 18mm">
                             <span style="color: rgba(10, 10, 105, 0.856); font-size:8pt;"><b
                                     class="text-right">Observacion: </b></span><br>
                             <span style="font-size:10pt "><b> {{ $printer->observaciones }}</b></span>
@@ -191,7 +191,6 @@
             </tbody>
 
         </table>
-        <br>
         <br>
         <br>
         <br>
@@ -234,8 +233,8 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" heigth="80mm">
-                    <div class="text-center" style=" heigth: 80mm !important; text-align: center !important; border: ridge; border-radius:1em;">
+                <td colspan="3" heigth="40mm">
+                    <div class="text-center" style=" heigth: 40mm !important; text-align: center !important; border: ridge; border-radius:1em;">
                         <p style="color: rgba(10, 10, 105, 0.856); font-size:12pt "><b>AUTORIZACIÓN:</b>Para la
                             Autorización debera adjuntarse toda la documentación necesaria
                         </p>

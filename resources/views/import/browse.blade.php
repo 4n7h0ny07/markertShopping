@@ -14,7 +14,7 @@
                 <p>Puedes descargar el archivo  Excel </p>
             </div> --}}
             <div class="col-md-10 text-right" style="margin-top: 40px">
-                <a type="button" class="btn btn-warning" href="{{ asset('files/plantillaProductos.xlsx') }}" target="_blank" rel="noopener noreferrer"> <i class="voyager-cloud-download"></i> Descargar Plantilla Excel</a>
+                <a type="button" class="btn btn-warning" href="{{ asset('files/plantillaProductos.xlsx') }}" rel="noopener noreferrer"> <i class="voyager-cloud-download"></i> Descargar Plantilla Excel</a>
             </div>
         </div>
     </div>

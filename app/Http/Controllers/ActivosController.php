@@ -84,18 +84,17 @@ class ActivosController extends Controller
 
         try {
              //insercion de los datos en la base de datos
-
+ ;
         $formNumber = Activos::whereNull('deleted_at')->max('number');
         $newFormNumber = $formNumber + 1;
-        $maxFormNumber = str_pad($newFormNumber, 6, '0', STR_PAD_LEFT);
+        $maxFormNumber = str_pad($newFormNumber, 6, '0', STR_PAD_LEFT)."/".date("Y");
 
-        $numberCuentas = str_pad($request->input('cuentas'), 3, '0', STR_PAD_LEFT);
 
         $activar = Activos::create([
             'persona_id' => $request->personal,
             'cuenta_id' => $request->cuentas,
             'number' => $maxFormNumber,
-            //'code_number',
+            //'code_number' => $codeActivo,
             'name' => $request->name_activo,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
@@ -112,7 +111,7 @@ class ActivosController extends Controller
         DB::commit(); 
         
         $id = DB::getPdo()->lastInsertId();
-
+        //dd($id);
         print($id);
 
         return redirect()->route('activos.index')->with(['message' =>'El activo fue registrado, con exito', 'alert-type' => 'success']);
@@ -145,7 +144,7 @@ class ActivosController extends Controller
             $q->whereNull('deleted_at');
         }])->where('id', $id)->whereNull('deleted_at')->first();
 
-        $pdf = PDF::loadView("printer.requerimientos.activos", compact('printer', 'title_printer', 'subTitle_printer'));
+        $pdf = PDF::setpaper("letter")->loadView("printer.requerimientos.activos", compact('printer', 'title_printer', 'subTitle_printer'));
         $pdf_name = 'frm_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);
@@ -165,7 +164,7 @@ class ActivosController extends Controller
             $q->whereNull('deleted_at');
         }])->where('id', $id)->whereNull('deleted_at')->first();
 
-        $pdf = PDF::loadView("printer.requerimientos.baja", compact('printer', 'title_printer', 'subTitle_printer'));
+        $pdf = PDF::setpaper("letter")->loadView("printer.requerimientos.baja", compact('printer', 'title_printer', 'subTitle_printer'));
         $pdf_name = 'frm_' . $printer->number . '_' . str::Slug($printer->persona->names) . '.pdf';
         //return $pdf->setPaper('letter')->stream();
         return $pdf->download($pdf_name);
@@ -185,7 +184,7 @@ class ActivosController extends Controller
     public function update(Request $request, string $id)
     {
         //
-    }
+    }    
 
     /**
      * Remove the specified resource from storage.
@@ -193,10 +192,16 @@ class ActivosController extends Controller
     public function destroy(string $id)
     {
         //
+      
+    }
+
+    public function delete($id){
+        //
+        dd($id);
         DB::beginTransaction();
         try {
             Activos::where('id', $id)->update([
-                'estado' => 'eliminado',
+                'status_at' => false,
                 'deleted_at' => Carbon::now()
             ]);
             DB::commit();
@@ -205,5 +210,5 @@ class ActivosController extends Controller
             DB::rollback();
             return redirect()->route('activos.index')->with(['message' => 'Ocurrio un error al eliminar el producto', 'alert-type' => 'error']);
         }
-    }
+   }
 }

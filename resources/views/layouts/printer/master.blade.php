@@ -181,7 +181,7 @@
                         @endswitch
 
                         <b style="color: rgb(250, 3, 3); font-size:13pt; font-weight:bold">N°
-                            {{ $printer->number }}/@php echo date('Y')@endphp</b>
+                            {{ $printer->number }}</b>
 
                     </div>
                 </td>

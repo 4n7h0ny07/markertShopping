@@ -40,11 +40,11 @@
                                 <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
                               
                             </a> --}}
-                            <button title="dar de baja" class="btn btn-sm btn-warning delete" data-toggle="modal" data-target="#modal_baja">
+                            <button title="dar de baja" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_baja" onclick="deathItem('{{url('requerimientos/activos'.$item->id)}}')">
                                 <i class="voyager-frown"></i> <span class="hidden-xs hidden-sm">Baja</span>
                             </button>   
-                            <button title="Borrar" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#delete_modal" onclick="deleteItem('{{ url('activos/death/'.$item->id) }}')">
-                                <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Eliminar</span>
+                            <button title="Borrar" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#delete_modal" onclick="deleteItem('{{url('requerimientos/activos'.$item->id)}}')"> 
+                                <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
                             </button>                     
                         </td>
                     </tr>

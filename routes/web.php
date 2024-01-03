@@ -37,18 +37,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'loghttp'], function () {
 
     Route::resource('import', importController::class);
 
- ///compras requerimientos
+ ///requerimientos compras
     Route::resource('requerimientos/compras', ComprasController::class);
     Route::get('requerimientos/compras/list/ajax/{search?}',[ComprasController::class, 'list']);
     Route::get('requerimientos/compras/{id}',[ComprasController::class, 'show'])->name('voyager.requerimientos.compras');
     Route::get('requerimientos/compras/{id}/print', [ComprasController::class, 'print'])->name('compras.print');
 
-///activar compras 
+///requerimientos activos
     Route::resource('requerimientos/activos', ActivosController::class);
     Route::get('requerimientos/activos/list/ajax/{search?}',[ActivosController::class, 'list']);
     Route::get('requerimientos/activos/{id}',[ActivosController::class, 'show'])->name('voyager.requerimientos.activos');
     Route::get('requerimientos/activos/{id}/print', [ActivosController::class, 'print'])->name('activos.print');
-    Route::put('requerimientos/activos/{id}/death',[ActivosController::class, 'death'])->name('requerimientos.death');
+    Route::put('requerimientos/activos/{id}/death',[ActivosController::class, 'death'])->name('activos.death');
+    Route::delete('requerimientos/activos/delete/{id}',[ActivosController::class, 'delete']);
     
    
 
