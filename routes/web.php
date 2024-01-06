@@ -4,6 +4,7 @@ use App\Http\Controllers\importController;
 use App\Http\Controllers\transaccionsController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ActivosController;
+use App\Http\Controllers\PlanpagosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,10 +52,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'loghttp'], function () {
     Route::put('requerimientos/activos/{id}/death',[ActivosController::class, 'death'])->name('activos.death');
     Route::delete('requerimientos/activos/delete/{id}',[ActivosController::class, 'delete']);
     
-   
+//plan de pagos para ventas al creditos
+    Route::resource('plan', PlanpagosController::class);
+    Route::get('plan/list/ajax/{search}', [PlanpagosController::class, 'list']);
+    Route::post('plan/{id}', [PlanpagosController::class, 'show'])->name('voyager.plan');
+
 
     Route::get('transaccions', [transaccionsController::class, 'index'])->name('transaccions.index');
     
+
 });
 
 //Route::get('servers/{server}/test', [ServersController::class, 'test'])->name('servers.test');
