@@ -9,4 +9,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class categoria extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $filellable = [
+        'names',
+        'code',
+        'description',
+        'user_id'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($categoria) {
+            // Obtiene el ID del usuario logueado y lo asigna a la categoria
+            $categoria->user_id = auth()->id();
+        });
+    }
 }

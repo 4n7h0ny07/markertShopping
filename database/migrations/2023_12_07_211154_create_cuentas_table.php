@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('saldo',10,2)->default(0);
             $table->string('descriptions')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('tipo_cuenta_id')->references('id')->on('tipocuentas');
             $table->timestamps();
             $table->softDeletes();

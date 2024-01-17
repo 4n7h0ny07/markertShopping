@@ -22,4 +22,9 @@ class cuenta extends Model
         return $this->hasMany(Activos::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

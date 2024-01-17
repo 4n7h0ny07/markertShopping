@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->decimal('monto',10,2);
             $table->string('descriptions');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cuenta_id')->references('id')->on('cuentas');
             $table->timestamps();
             $table->softDeletes();

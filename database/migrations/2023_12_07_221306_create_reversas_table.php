@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->date('fecha');
             $table->text('descripcion');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('transaccion_id')->references('id')->on('transaccions');
             $table->timestamps();
         });

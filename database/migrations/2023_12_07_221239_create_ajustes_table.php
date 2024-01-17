@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('monto',10,2);
             $table->text('descriptions');
             $table->string('tipoajuste');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cuenta_id')->references('id')->on('cuentas');
             $table->timestamps();
             $table->softDeletes();

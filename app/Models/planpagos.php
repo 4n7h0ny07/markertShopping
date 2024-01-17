@@ -20,4 +20,19 @@ class planpagos extends Model
        'status_ativo',
        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($planpagos) {
+            // Obtiene el ID del usuario logueado y lo asigna a la planpagos
+            $planpagos->user_id = auth()->id();
+        });
+    }
 }

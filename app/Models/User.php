@@ -47,4 +47,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasAnyRole(['Admin', 'Gerente', 'Supervisor']);
     }
+
+    public function marca()
+    {
+        return $this->hasMany(marca::class);
+    }
 }

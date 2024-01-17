@@ -48,7 +48,7 @@ class install extends Command
             $this->call('key:generate');
             $this->call('storage:link');
             $this->call('migrate:fresh');
-            $this->call('db:seed', ['--class' => 'PlatillaDatabaseSeeder']);
+            $this->call('db:seed', ['--class' => 'PlantillaDatabaseSeeder']);
             $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => ['config', 'voyager_avatar']]);
 
             // $type = $this->option('type') ?? 'tecnoblue';

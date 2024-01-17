@@ -9,4 +9,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class marca extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillelable = [
+        'image',
+        'names',
+        'code',
+        'description',
+        'user_id'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($marca) {
+            // Obtiene el ID del usuario logueado y lo asigna a la marca
+            $marca->user_id = auth()->id();
+        });
+    }
 }

@@ -19,14 +19,17 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('code')->nullable();
             $table->string('names');
-            $table->string('model');
+            $table->string('model')->nullable();
             $table->string('price')->nullable();
             $table->string('imei')->nullable();
             $table->string('mac')->nullable();
             $table->string('description')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('almacen_id')->references('id')->on('almacens');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->foreign('marca_id')->references('id')->on('marcas');
+
             $table->timestamps();
             $table->softDeletes();
         });

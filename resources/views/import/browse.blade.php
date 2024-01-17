@@ -33,13 +33,13 @@
                                     <label for="type">Tipo</label>
                                     <select name="type" class="form-control select2" required>
                                         <option value="">Seleccione tipo de datos</option>
-                                        <option value="products">Productos</option>
+                                        <option value="grupo">Grupo Clientes</option>
+                                        <option value="personas">Clientes</option>
+                                        <option value="productos">Productos</option>
                                         <option value="marcas">Marcas</option>
                                         <option value="categorias">Categorias</option>
-                                        {{-- <option value="products">Productos</option>
-                                        <option value="products">Productos</option> --}}
-
-                                        
+                                        <option value="precios">Subir Precios de Productos</option>
+                                        <option value="planpagos">Plan de Pagos</option>
 
                                     </select>
                                 </div>

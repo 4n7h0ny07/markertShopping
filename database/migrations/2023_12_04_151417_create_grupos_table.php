@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
             $table->string('names');
-            $table->string('group_code');
-            $table->string('description');
+            $table->string('group_code')->nullable();
+            $table->string('description')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });
