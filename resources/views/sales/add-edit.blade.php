@@ -66,11 +66,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <select class="form-control" name="" id="">
-                                            <option value="">Codigo</option>
-                                            <option value="">producto</option>
-                                            <option value="">Descripcion</option>
-                                            <option value="">Codigo de Barra</option>
-                                            <option value="">Codigo SK</option>
+                                            <option value="codigo">Codigo</option>
+                                            <option value="producto">producto</option>
+                                            <option value="descriptions">Descripcion</option>
+                                            <option value="serial">Codigo de Barra</option>
+                                            <option value="marca">Marca</option>
+                                            <option value="categoria">Categoria</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,10 +87,11 @@
                                 <div class="col-md-12" style="height: 370px; max-height: 370px; overflow-y: auto">
                                     <div class="row">
                                         @foreach ($productos as $producto)
-                                            <div class="card col-md-3" style="max-width: 250px; height:50mm">
+                                            <div class="card col-md-4 text-info" style="max-width: 250px; height:50mm">
                                                 <div class="row g-0">
                                                     <div class="col-md-4">
-                                                        <img src="..." class="img-fluid rounded-start" alt="...">
+                                                        <img src="{{ asset('images/no_file.png') }}" width="100px"
+                                                            class="img-fluid rounded-start" alt="...">
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="card-body">
@@ -113,13 +115,13 @@
                         <div class="panel panel-bordered">
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label>Proveedor</label>
+                                    <label>Cliente</label>
                                     <select name="proveedor_id" id="select-proveedor_id" class="form-control select2"
                                         required>
-                                        <option disabled selected value="">Seleccionar proveedor </option>
+                                        <option disabled selected value="">Seleccionar Cliente </option>
                                         @foreach ($personas as $item)
                                             <option value="{{ $item->id }}">{{ $item->names }} -
-                                                {{ $item->nit ?? 'NN' }}</option>
+                                                {{ $item->dni ?? 'NN' }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('proveedor_id'))
@@ -131,8 +133,37 @@
                                 <div class="form-group">
                                     <textarea name="observaciones" class="form-control" rows="3" placeholder="Observaciones">{{ isset($reg) ? $reg->observaciones : old('observaciones') }}</textarea>
                                 </div>
+                                <div class="form-group col-md-12">
+                                    <div class="input-group">
+                                        <select name="" id="" class="form-control select2">
+                                            <option value="">Seleccionar Plan de Pagos</option>
+                                            @foreach ($tipopagos as $planes)
+                                                <option value="{{ $planes->id }}">{{ $planes->descripcion }}</option>
+                                            @endforeach
+
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-warning" title="Plan de Pagos"
+                                                data-target="#modal-create-planpagos" data-toggle="modal" style="margin: 0px"
+                                                type="button">
+                                                <span class="voyager-window-list" aria-hidden="true"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+
+
+                                </div>
                                 <div class="form-group">
-                                    <h3 class="text-right" id="label-total">0.00 Bs.</h3>
+                                    <div class="col-md-6"><input type="text" class="form-control" name="money"
+                                            placeholder="0.00"></div>
+                                    <div class="col-md-6"><input type="text" class="form-control" name="money"
+                                            placeholder="0.00"></div>
+
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    <h3 class="text-right"><small> Total a Pagar : Bs. </small> <b id="label-total"></b>
+                                        0.00 Bs.</h3>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="proforma" value="1"
@@ -185,4 +216,44 @@
                 </div>
         </form>
     </div>
+        {{-- Modal crear cliente --}}
+        <form action="#" id="form-create-planpagos" method="POST">
+            <div class="modal fade" tabindex="-1" id="modal-create-planpagos" role="dialog">
+                <div class="modal-dialog modal-warning">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"><i class="voyager-window-list"></i> Generar Pal de Pagos</h4>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            <input type="hidden" name="type" value="normal">
+                            <input type="hidden" name="status" value="activo">
+                            <div class="form-group">
+                                <label for="full_name">Nombre completo</label>
+                                <input type="text" name="full_name" class="form-control" placeholder="Juan Perez" required>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="full_name">NIT/CI</label>
+                                    <input type="text" name="dni" class="form-control" placeholder="123456789">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="full_name">Celular</label>
+                                    <input type="text" name="phone" class="form-control" placeholder="75199157">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Dirección</label>
+                                <textarea name="address" class="form-control" rows="3" placeholder="C/ 18 de nov. Nro 123 zona central"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-primary btn-save-customer" value="Guardar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 @stop

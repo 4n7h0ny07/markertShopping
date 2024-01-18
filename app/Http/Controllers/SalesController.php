@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\almacen;
 use App\Models\persona;
+use App\Models\planpagos;
+use App\Models\pricelist;
 use App\Models\producto;
+use App\Models\TipoPlanPago;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -18,8 +22,10 @@ class SalesController extends Controller
 
     public function index()
     {
+        $almacen = almacen::whereNull('deleted_at')->get();
+        $pricelist = pricelist::whereNull('deleted_at')->get();
         //vista indes de las ventas -  sales 
-        return view('sales.browse');
+        return view('sales.browse', compact('almacen', 'pricelist'));
     }
 
     /**
@@ -35,7 +41,9 @@ class SalesController extends Controller
 
     $productos = producto::whereNull('deleted_at')->get();
 
-    return view('sales.add-edit', compact('personas', 'type', 'productos'));
+    $tipopagos = TipoPlanPago::whereNull('deleted_at')->get();
+
+    return view('sales.add-edit', compact('personas', 'type', 'productos', 'tipopagos'));
     }
 
     /**

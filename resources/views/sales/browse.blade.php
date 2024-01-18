@@ -19,31 +19,35 @@
                     <div class="card-body">
                         <div class="col-md-4 form-group">
                             <select class="form-control" name="listaprecios" id="">
-                                <option value="">Contado</option>
-                                <option value="">Credito</option>
+                                @foreach ($pricelist as $lista)
+                                    <option value="{{$lista->id}}">{{$lista->namelists}}</option>
+                                @endforeach
+
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
                             <select class="form-control" name="almacen" id="">
-                                <option value="">Almacen A</option>
-                                <option value="">Almacen B</option>
+                                @foreach ($almacen as $item)
+                                    <option value="{{$item->id}}">{{$item->names}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="col-md-2 form-group">
-                            <input name="nit" type="text" class="form-control" placeholder="Codigo, Nit o Nro carnet">
+                            <input name="nit" type="text" class="form-control"
+                                placeholder="Codigo, Nit o Nro carnet">
                         </div>
                         <div class="col-md-4 form-group">
                             <input name="names" type="text" class="form-control" placeholder="Nombre completo">
                         </div>
                         <div class="col-md-3 form-group">
-                            <input name="date1" type="date" class="form-control" placeholder="fecha inicio">
+                            <input name="date1" type="date" class="form-control" value="{{ date('Y-m-d')}}" placeholder="fecha inicio">
                         </div>
                         <div class="col-md-3 form-group">
-                            <input name="date2" type="date" class="form-control" placeholder="fecha fin">
+                            <input name="date2" type="date" class="form-control" value="{{ date('Y-m-d')}}" placeholder="fecha fin">
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
