@@ -23,6 +23,11 @@ class marca extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function productos()
+    {
+        return $this->hasMany(producto::class)->withTrashed();
+    }
+
     public static function boot()
     {
         parent::boot();

@@ -29,7 +29,7 @@ class priceproduct extends Model
 
     public function productos()
     {
-        return $this->belongsTo(producto::class);
+        return $this->belongsTo(producto::class)->withTrashed();
     }
 
     public function user()

@@ -25,14 +25,21 @@ class producto extends Model
        'user_id',
     ];
 
-    public function priceproduct()
+    public function priceproducts()
     {
-        return $this->hasMany(priceproduct::class, 'product_id');
+        return $this->hasMany(priceproduct::class, 'products_id')->withTrashed();
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function categorias(){
+        return $this->belongsTo(categoria::class, 'categoria_id')->withTrashed();
+    }
+    public function marcas(){
+        return $this->belongsTo(marca::class, 'marca_id')->withTrashed();
     }
 
     public static function boot()

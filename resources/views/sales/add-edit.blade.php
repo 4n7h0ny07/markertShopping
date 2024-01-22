@@ -6,7 +6,7 @@
 
 @section('page_title', ($type == 'edit' ? 'Editar' : 'Agregar') . ' Venta')
 
-@section('page_header')
+{{-- @section('page_header')
 
     <div class="row">
         <div class="col-md-4">
@@ -22,7 +22,7 @@
             </a>
         </div>
     </div>
-@stop
+@stop --}}
 
 @section('content')
     <div class="page-content edit-add container-fluid">
@@ -56,34 +56,41 @@
                 @endif
                 <div class="row">
                     <div class="col-md-9">
-                        <div class="panel panel-bordered">
+                        <div class="panel panel-info">
+                            <div class="panel-heading ">
+                                <div class="container">
+                                    <br>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Codigo, producto, etc.">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select class="form-control" name="" id="">
+                                                <option value="codigo">Codigo</option>
+                                                <option value="producto">producto</option>
+                                                <option value="descriptions">Descripcion</option>
+                                                <option value="serial">Codigo de Barra</option>
+                                                <option value="marca">Marca</option>
+                                                <option value="categoria">Categoria</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select class="form-control" name="" id="">
+                                                <option value="">Todos</option>
+                                                <option value="">Con Existencia</option>
+                                                <option value="">Sin Existencia</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="panel-body">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Codigo, producto, etc.">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select class="form-control" name="" id="">
-                                            <option value="codigo">Codigo</option>
-                                            <option value="producto">producto</option>
-                                            <option value="descriptions">Descripcion</option>
-                                            <option value="serial">Codigo de Barra</option>
-                                            <option value="marca">Marca</option>
-                                            <option value="categoria">Categoria</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select class="form-control" name="" id="">
-                                            <option value="">Todos</option>
-                                            <option value="">Con Existencia</option>
-                                            <option value="">Sin Existencia</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                <br>
                                 <div class="col-md-12" style="height: 370px; max-height: 370px; overflow-y: auto">
                                     <div class="row">
                                         @foreach ($productos as $producto)
@@ -94,12 +101,19 @@
                                                             class="img-fluid rounded-start" alt="...">
                                                     </div>
                                                     <div class="col-md-8">
+                                                        
                                                         <div class="card-body">
-                                                            <h5 class="card-title">{{ $producto->names }}</h5>
-                                                            <p class="card-text"><small class="text-body-secondary">Last
-                                                                    updated 3 mins ago</small></p>
+                                                            <b>id : {{$producto->id}}</b>
+                                                            <h5 class="card-title">{{ $producto->categorias->names.' '.$producto->marcas->names.' '.$producto->names }}</h5>
+                                                            <span>Bs. <b>{{ $precios->where('products_id', $producto->id)->first()->price_normal ?? ''}}</b></span>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <p class="card-text"><small class="text-body-secondary"
+                                                            style="size: 5pt;">Last
+                                                            {{ Carbon\Carbon::parse($producto->created_at)->diffForHumans() }}</small>
+                                                    </p>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -144,8 +158,8 @@
                                         </select>
                                         <span class="input-group-btn">
                                             <button class="btn btn-warning" title="Plan de Pagos"
-                                                data-target="#modal-create-planpagos" data-toggle="modal" style="margin: 0px"
-                                                type="button">
+                                                data-target="#modal-create-planpagos" data-toggle="modal"
+                                                style="margin: 0px" type="button">
                                                 <span class="voyager-window-list" aria-hidden="true"></span>
                                             </button>
                                         </span>
@@ -161,6 +175,7 @@
 
                                 </div>
                                 <br><br>
+                                <hr>
                                 <div class="form-group">
                                     <h3 class="text-right"><small> Total a Pagar : Bs. </small> <b id="label-total"></b>
                                         0.00 Bs.</h3>
@@ -172,9 +187,13 @@
                                         Generar solo proforma
                                     </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <button type="submit" class="btn btn-primary btn-block btn-submit"><i
                                             class="voyager-check"></i> Guardar compra</i></button>
+                                            <a href="{{ route('sales.index') }}" class="text-center text-warning">
+                                                <span class="glyphicon glyphicon-list"></span>&nbsp;
+                                                Volver a la lista
+                                            </a>
                                 </div>
                             </div>
                         </div>
@@ -216,44 +235,46 @@
                 </div>
         </form>
     </div>
-        {{-- Modal crear cliente --}}
-        <form action="#" id="form-create-planpagos" method="POST">
-            <div class="modal fade" tabindex="-1" id="modal-create-planpagos" role="dialog">
-                <div class="modal-dialog modal-warning">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"><i class="voyager-window-list"></i> Generar Pal de Pagos</h4>
+    {{-- Modal crear cliente --}}
+    <form action="#" id="form-create-planpagos" method="POST">
+        <div class="modal fade" tabindex="-1" id="modal-create-planpagos" role="dialog">
+            <div class="modal-dialog modal-warning">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="voyager-window-list"></i> Generar Pal de Pagos</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="type" value="normal">
+                        <input type="hidden" name="status" value="activo">
+                        <div class="form-group">
+                            <label for="full_name">Nombre completo</label>
+                            <input type="text" name="full_name" class="form-control" placeholder="Juan Perez"
+                                required>
                         </div>
-                        <div class="modal-body">
-                            @csrf
-                            <input type="hidden" name="type" value="normal">
-                            <input type="hidden" name="status" value="activo">
-                            <div class="form-group">
-                                <label for="full_name">Nombre completo</label>
-                                <input type="text" name="full_name" class="form-control" placeholder="Juan Perez" required>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="full_name">NIT/CI</label>
+                                <input type="text" name="dni" class="form-control" placeholder="123456789">
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="full_name">NIT/CI</label>
-                                    <input type="text" name="dni" class="form-control" placeholder="123456789">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="full_name">Celular</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="75199157">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Dirección</label>
-                                <textarea name="address" class="form-control" rows="3" placeholder="C/ 18 de nov. Nro 123 zona central"></textarea>
+                            <div class="form-group col-md-6">
+                                <label for="full_name">Celular</label>
+                                <input type="text" name="phone" class="form-control" placeholder="75199157">
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary btn-save-customer" value="Guardar">
+                        <div class="form-group">
+                            <label for="address">Dirección</label>
+                            <textarea name="address" class="form-control" rows="3" placeholder="C/ 18 de nov. Nro 123 zona central"></textarea>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn btn-primary btn-save-customer" value="Guardar">
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 @stop

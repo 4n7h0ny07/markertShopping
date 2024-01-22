@@ -60,8 +60,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'loghttp'], function () {
 
 // sales for clientes
     Route::resource('sales', SalesController::class);
+    Route::post('sales/create', [SalesController::class, 'create'])->name('sales.create');
 
-    
+
     Route::get('transaccions', [transaccionsController::class, 'index'])->name('transaccions.index');
     
 
