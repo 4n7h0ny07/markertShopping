@@ -41,9 +41,9 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 40%; height:10mm">
+                {{-- <td style="width: 40%; height:10mm">
                     <span>Fecha de Compra: </span> @php echo date('d F Y', strtotime($printer->created_at)); @endphp
-                </td>
+                </td> --}}
                 <td style="width: 30%; height:10mm">
                     <span>Vida Util: </span> {{ $printer->vida_util }} años.
                 </td>
@@ -89,8 +89,6 @@
         </table>
         <br>
         <br>
-        <br>
-        <br>
         <table width="100%" style="color: rgba(10, 10, 105, 0.856); font-size:9pt ">
             <tr>
                 <td>
@@ -117,11 +115,11 @@
                 </td>
                 <td>
                     <div style="text-align: center">
-                        <span>.....................................................<br>Firma Autorizado Por</span>
+                        <span>.....................................................<br>Recibido Por:</span>
                         <span style="text-align:left !important"><br>Nombre o Sello</span>
                         <br>
                         <br>
-                        <span><br>Monto Aut.: .........................................</span>
+                        <br>
                         <br>
                         <span><br>fecha: ..............................................</span>
                     </div>
@@ -131,8 +129,8 @@
                 <td colspan="3" heigth="60mm">
                     <div class="text-center"
                         style=" heigth: 60mm !important; text-align: center !important; border: ridge; border-radius:1em;">
-                        <p style="color: rgba(10, 10, 105, 0.856); font-size:12pt "><b>AUTORIZACIÓN:</b>Para la
-                            Autorización debera adjuntarse una copia de la factura de la compra.
+                        <p style="color: rgba(10, 10, 105, 0.856); font-size:12pt "><b>ACTIVACION:</b>Para la
+                            activacion debera adjuntarse una copia de la factura de la compra.
                         </p>
                     </div>
                 </td>

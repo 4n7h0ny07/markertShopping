@@ -74,7 +74,7 @@ class ComprasController extends Controller
             $nuevoNumero = $ultimoNumeroCompra + 1;
 
             // Formatear con ceros a la izquierda para tener siempre 6 dígitos
-            $numeroAscendente = str_pad($nuevoNumero, 6, '0', STR_PAD_LEFT)."/".date('Y');
+            $numeroAscendente = str_pad($nuevoNumero, 6, '0', STR_PAD_LEFT);
             $total = $request->input('tpagar');
             $adelanto = $request->input('anticipo');
             $saldo = null;

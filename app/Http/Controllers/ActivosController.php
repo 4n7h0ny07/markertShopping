@@ -87,7 +87,7 @@ class ActivosController extends Controller
  ;
         $formNumber = Activos::whereNull('deleted_at')->max('number');
         $newFormNumber = $formNumber + 1;
-        $maxFormNumber = str_pad($newFormNumber, 6, '0', STR_PAD_LEFT)."/".date("Y");
+        $maxFormNumber = str_pad($newFormNumber, 6, '0', STR_PAD_LEFT);
 
 
         $activar = Activos::create([
@@ -106,8 +106,24 @@ class ActivosController extends Controller
             'status_at' => true,
             'observaciones' => $request->observaciones,
             'user_id' => Auth::user()->id 
+
+            // 'persona_id',
+            // 'cuenta_id',
+            // 'number',
+            // 'code_number',
+            // 'name',
+            // 'marca',
+            // 'modelo',
+            // 'serialNumber',
+            // 'descriptions',
+            // 'costo',
+            // 'valor_residual',
+            // 'vida_util',
+            // 'status_at',
+            // 'observaciones',
+            // 'user_id'
         ]);
-        //dd($activar);
+       //dd($activar);
         DB::commit(); 
         
         $id = DB::getPdo()->lastInsertId();
@@ -117,6 +133,7 @@ class ActivosController extends Controller
         return redirect()->route('activos.index')->with(['message' =>'El activo fue registrado, con exito', 'alert-type' => 'success']);
         
         } catch (\Throwable $th) {
+            //dd($activar);
             DB::rollBack();
             return redirect()->route('activos.index')->with(['message' => 'Ocurrio un error al guardar el Activo', 'alert-type' => 'error']);
         }

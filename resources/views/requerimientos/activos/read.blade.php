@@ -77,7 +77,7 @@
                                         ACTIVO FIJO</small>
                                 </h2>
                                 <b style="color: rgb(250, 3, 3); font-size:16pt; font-weight:bold">N°
-                                    {{ $act->number }}/@php echo date('Y')@endphp</b>
+                                    {{ $act->number }}</b>
 
                             </div>
                             <div class="col-md-12">
@@ -100,9 +100,9 @@
                                     <p>{{ $act->descriptions }}</p>
                                 </div>
                                 <hr>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <p style="font-size: 12pt;"><b>Fecha de Compra: </b> {{ date('d F Y H:i', strtotime($act->created_at)) }}</p>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <p style="font-size: 12pt;"><b>Vida util del Activo: </b> {{ $act->vida_util }} Años</p>
                                 </div>
