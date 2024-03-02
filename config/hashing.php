@@ -13,6 +13,11 @@ return [
     |
     | Supported: "bcrypt", "argon", "argon2id"
     |
+    | Esta opción controla el controlador hash predeterminado que se utilizará para realizar hash.
+    | contraseñas para su aplicación. Por defecto, el algoritmo bcrypt es
+    | usado; sin embargo, usted es libre de modificar esta opción si lo desea.
+    |
+    | Compatible: "bcrypt", "argon", "argon2id"
     */
 
     'driver' => 'bcrypt',

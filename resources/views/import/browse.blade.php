@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="file">Archivo</label>
-                                    <input type="file" name="file">
+                                    <input type="file" name="file" class="form-control">
                                 </div>
                             </div>
                         </div>
